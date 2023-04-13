@@ -1,0 +1,20 @@
+python3 manage.py runserver 0:8000
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+python3 manage.py createsuperuser
+python3 manage.py changepassword
+
+
+
+all register model in admin
+
+
+1. ImageFields da - mb, extension (png, jpg, jpeg), auto-size 200x200
+
+
+django-resized
+django import export
+
+
