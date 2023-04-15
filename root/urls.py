@@ -10,8 +10,8 @@ admin.site.site_title = "P8 group ning Adminkasi"
 admin.site.index_title = "P8 group saytiga xush kelibsiz!"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('client-admin/', client_admin_site.urls),
-    path('', include('apps.urls')),
+  path('admin/', admin.site.urls),
+  path('client-admin/', client_admin_site.urls),
+  path('', include('apps.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
 + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
