@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  web:
+    restart: always
+    build: .
+    container_name: django
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: 'true'
+    depends_on:
+      - postgres
+
+    command: python3 manage.py runserver 0:8000
+
+  postgres:
+    restart: always
+    image: postgres:alpine
+    container_name: p8_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: p8_group_db
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:
