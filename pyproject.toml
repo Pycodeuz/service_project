@@ -10,6 +10,12 @@ packages = [{include = "root"}]
 python = "^3.10"
 django = "^4.2"
 pillow = "^9.5.0"
+django-mptt = "^0.14.0"
+pyyaml = "^6.0"
+ujson = "^5.7.0"
+python-dotenv = "^1.0.0"
+psycopg2-binary = "^2.9.6"
+drf-social-oauth2 = "^2.1.1"
 
 
 [build-system]
