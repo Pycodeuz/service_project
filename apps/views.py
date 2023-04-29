@@ -24,7 +24,7 @@ def view(request):
     # models.Tag.truncate()
     # models.Tag.objects.annotate(soni=Count('name'))
 
-    return HttpResponse('123')
+    return HttpResponse('hello world')
 
 
 def levenshtein(name, word):

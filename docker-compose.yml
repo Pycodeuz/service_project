@@ -1,7 +1,7 @@
-version: '3'
+version: '3.8'
 
 services:
-  django_web:
+  django_service:
     restart: always
     build: .
     container_name: django
@@ -11,19 +11,20 @@ services:
       DEBUG: "true"
       DB_ENGINE: django.db.backends.mysql
       DB_NAME: p8_mysql_group_db
-      DB_USER: user
+      DB_USER: root
       DB_PASSWORD: 1
-      DB_HOST: mysql
+      DB_HOST: mysql_service
       DB_PORT: 3306
 
     depends_on:
-      - mysql
+      - mysql_service
+      - redis_service
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
 
-#  postgres:
+#  postgres_service: ✅
 #    restart: always
 #    image: postgres:alpine
 #    container_name: p8_pg_db
@@ -35,16 +36,26 @@ services:
 #    volumes:
 #      - pg_data:/var/lib/postgresql/data/
 
-  mysql:
+  mysql_service:
     restart: always
-    image: mysql:8.0.30-debian
+    image: mysql
     container_name: p8_mysql_db
     ports:
         - "3306:3306"
     environment:
-        - MYSQL_ROOT_PASSWORD=1
+        MYSQL_DATABASE: p8_mysql_group_db
+        MYSQL_ROOT_PASSWORD: 1
     volumes:
       - my_data:/var/lib/mysql
+
+  redis_service:
+    restart: always
+    image: redis:alpine
+    container_name: p8_redis_cache
+    ports:
+        - "6379:6379"
+    volumes:
+      - redis_data:/data
 
 #  elasticsearch:
 #    restart: always
@@ -60,4 +71,5 @@ services:
 volumes:
 #  pg_data:
   my_data:
+  redis_data:
 #  els_data:

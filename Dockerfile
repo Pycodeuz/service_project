@@ -3,13 +3,13 @@ FROM python:3.11.0-slim
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-RUN apt-get update && apt-get -y install default-libmysqlclient-dev python3-dev gcc libc-dev mariadb-dev build-base
+RUN apt-get update && apt-get -y install default-libmysqlclient-dev python3-dev gcc libc-dev
 
 WORKDIR /app
 COPY . /app
 
 RUN --mount=type=cache,id=custom-pip,target=/root/.cache/pip pip install -r /app/requirements.txt
-
+RUN pip install mysqlclient
 
 # docker build -t django_image .
 # docker build -t django_image -f Dockerfile .
@@ -34,6 +34,4 @@ RUN --mount=type=cache,id=custom-pip,target=/root/.cache/pip pip install -r /app
 # docker-compose down
 
 # dockerfile, docker-compose,docker-swarm
-
-
-#https://www.dotnetthailand.com/web-frameworks/django/docker-compose-for-django-mysql
+# docker run --name myredis -p 6379:6379 redis:alpine

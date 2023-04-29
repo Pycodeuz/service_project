@@ -25,12 +25,12 @@ elasticsearch
 celery
 rabbitmq
 redis
-mysql
 mongodb
 
 
 django ✅
 postgresql ✅
+mysql ✅
 
 
 
