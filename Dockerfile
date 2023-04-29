@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . /app
 
 RUN --mount=type=cache,id=custom-pip,target=/root/.cache/pip pip install -r /app/requirements.txt
-RUN pip install mysqlclient
+# RUN pip install mysqlclient
 
 # docker build -t django_image .
 # docker build -t django_image -f Dockerfile .

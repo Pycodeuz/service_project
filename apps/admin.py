@@ -1,4 +1,8 @@
-# from django.contrib import admin
+from django.contrib import admin
+
+from apps.models import Car
+
+
 # from django.contrib.admin.sites import DefaultAdminSite
 # from django.db.models import Count
 # from django.forms import forms
@@ -8,6 +12,10 @@
 # from django.utils.safestring import mark_safe
 # import csv
 # import io
+
+@admin.register(Car)
+class CategoryModelAdmin(admin.ModelAdmin):
+    pass
 
 # from apps.models import Category, Product, Tag, Origin, Hero, Villain
 #

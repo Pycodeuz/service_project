@@ -21,18 +21,19 @@ poetry export --without-hashes --format=requirements.txt > requirements.txt
 
 
 fastapi
-elasticsearch
 celery
 rabbitmq
-redis
 mongodb
 
 
 django ✅
 postgresql ✅
+redis ✅
 mysql ✅
+elasticsearch ✅
 
 
 
 poetry export --without-hashes --format=requirements.txt > requirements.txt
 
+docker run -d --name es_container -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.14.0

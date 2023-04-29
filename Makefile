@@ -9,3 +9,5 @@ delete_mig:
 
 docker_rm:
 	docker rm -f django_container
+index:
+	./manage.py search_index --rebuild

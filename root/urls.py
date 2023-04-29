@@ -14,18 +14,37 @@ from django.urls import path, include
 #
 from django.core.cache import cache
 
+from apps.documents import CarDocument
+from apps.models import Car
 
-def view(request):
-    user_id = request.user.id
-    if cache.get(user_id):
-        return HttpResponse(user_id)
-    cache.set(user_id, request.user.username)
-    time.sleep(3)
-    return HttpResponse(request.user.username)
+
+# def view(request):
+#     user_id = request.user.id
+#     if cache.get(user_id):
+#         return HttpResponse(user_id)
+#     cache.set(user_id, request.user.username)
+#     time.sleep(3)
+#     return HttpResponse(request.user.username)
+
+def view(request, word):
+    # car = Car.objects.create(
+    #     name="Car one",
+    #     color="red",
+    #     type=1,
+    #     description="A beautiful car"
+    # )
+
+    s = CarDocument.search().query("match", name=word)
+    data = []
+    for hit in s:
+        data.append(
+            "Car name : {}, description {}".format(hit.name, hit.description)
+        )
+    return HttpResponse(data)
 
 
 urlpatterns = [
-    path('data', view),
+    path('data/<str:word>', view),
     path('admin/', admin.site.urls),
     #   path('client-admin/', client_admin_site.urls),
     #   path('', include('apps.urls')),
